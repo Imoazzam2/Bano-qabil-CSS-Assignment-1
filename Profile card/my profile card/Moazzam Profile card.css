@@ -1,0 +1,128 @@
+.background {
+    background-color: #f0f0f0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}   
+.profile-card {
+    background-color: #329fc0;
+    border-radius: 10px;
+    width: 350px;
+    padding: 20px;
+    box-shadow: 10px 10px 5px #aaaaaa;
+    color: white;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    transition: transform 0.3s;
+
+}
+.profile-card:hover {
+    transform: scale(1.15);
+}
+.profile-card img {
+    width: 250px;
+    height: 200px;
+    border-radius: 25%;
+    margin-bottom: 15px;
+}
+.profile-card h1 {
+    font-size: 24px;
+    margin: 10px 0;
+}
+.profile-card p {
+    font-size: 16px;
+    margin: 5px 0;
+}
+.name {
+    font-weight: bold;
+    font-size: 20px;
+    justify-content: left;
+    justify-items: left;
+    text-align: left;
+    float: left;
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration-color: black;
+    text-decoration-line: underline;
+    text-shadow: 10px 10px 5px #242222;
+}
+button {
+    background-color: #ffffff;
+    color: #329fc0;
+    border: none;
+    padding: 0px;
+    margin: auto;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: background-color 0.3s, color 0.3s;
+    height: 40px;
+    width: 100px;
+    float: right;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+description {
+    font-size: 14px;
+    color: #ffffff;
+    margin-top: 10px;
+    text-align: left;
+    font-style: italic;
+    margin-bottom: 10px;
+    float: left;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    word-spacing: 1px;
+}
+button:hover {
+    background-color: #329fc0;
+    color: white;
+}
+.profile-card .social-icons {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+.profile-card .social-icons a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+    font-size: 24px;
+    transition: color 0.3s;
+}
+.bio {
+    font-size: 14px;
+    color: #ffffff;
+    margin-top: 10px;
+    text-align: left;
+    font-style: italic;
+    margin-bottom: 10px;
+    float: left;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+    text-justify: auto;
+    line-height: 15px;
+
+}
+.social-icons {
+    color: #f0f0f0;
+    font-size: 24px;
+    margin: 0 10px;
+    text-decoration: none;
+    transition: color 0.3s;
+    float: left;
+}
+.contact-info {
+    font-size: 14px;
+    color: #ffffff;
+    margin-top: 10px;
+    text-align: left;
+    font-style: italic;
+    margin-bottom: 10px;
+    float: right;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 3px;
+}
