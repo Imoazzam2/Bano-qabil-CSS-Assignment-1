@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weekly Schedule</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    table {
+      width: 90%;
+      max-width: 1000px;
+      border-collapse: collapse;
+      caption-side: top;
+      empty-cells: show;
+      background-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(4px);
+    }
+
+    caption {
+      font-size: 1.8em;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    th, td {
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 12px;
+      text-align: center;
+    }
+
+    thead th {
+      background-color: rgba(0, 0, 0, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    /* Highlight alternate rows */
+    tbody tr:nth-child(even) {
+      background-color: rgba(255, 255, 255, 0.25);
+    }
+
+    tbody tr:nth-child(odd) {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    td:empty {
+      background-color: rgba(212, 13, 13, 0.877);
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <table>
+    <caption>Weekly Availability Schedule</caption>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Sunday</th>
+        <th>Monday</th>
+        <th>Tuesday</th>
+        <th>Wednesday</th>
+        <th>Thursday</th>
+        <th>Friday</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Lawrence Scott</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td><td>Yes</td></tr>
+      <tr><td>Jane Medina</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td><td>Yes</td></tr>
+      <tr><td>Billy Mitchell</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td><td>Yes</td></tr>
+      <tr><td>Beverly Reid</td><td>No</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td></tr>
+      <tr><td>Tiffany Wade</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>Yes</td></tr>
+      <tr><td>Sean Adams</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td><td>Yes</td></tr>
+      <tr><td>Rachel Simpson</td><td>No</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td></tr>
+      <tr><td>Mark Salazar</td><td>Yes</td><td>No</td><td>No</td><td>Yes</td><td>No</td><td></td></tr>
+    </tbody>
+  </table>
+</body>
+</html>
