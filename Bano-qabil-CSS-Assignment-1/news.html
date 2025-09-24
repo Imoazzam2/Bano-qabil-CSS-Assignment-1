@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latest News - Virtual Museum of Chemistry</title>
+    <meta name="description" content="Stay updated with the latest news, events, and discoveries from the Virtual Museum of Chemistry.">
+    <style>
+        /* CSS Variables for consistent theming */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --text: #333;
+            --text-light: #fff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -15px;
+        }
+
+        .twelve.columns {
+            width: 100%;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--primary);
+            color: var(--text-light);
+            box-shadow: var(--shadow);
+            padding: 0 0 10px 0;
+        }
+
+        .mininav {
+            background-color: #1a252f;
+            padding: 8px 0;
+            font-size: 0.9rem;
+        }
+
+        .mininav ul {
+            list-style: none;
+            display: flex;
+            justify-content: flex-end;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .mininav li {
+            margin-left: 20px;
+        }
+
+        .mininav a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .mininav a:hover {
+            color: var(--secondary);
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            flex: 0 0 auto;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-main {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+            flex: 1;
+        }
+
+        #VMC-logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: var(--text-light);
+            margin-bottom: 5px;
+        }
+
+        .site-title {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: normal;
+            color: #ecf0f1;
+        }
+
+        .site-title a {
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        /* Navigation Styles - Moved below header */
+        #top-menu {
+            background-color: #34495e;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        #top-menu .menu {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        #top-menu .menu li {
+            margin: 0;
+        }
+
+        #top-menu .menu a {
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
+            transition: var(--transition);
+            border-radius: 4px;
+            margin: 0 2px;
+        }
+
+        #top-menu .menu a.active {
+            background-color: var(--secondary);
+        }
+
+        #top-menu .menu a:hover {
+            background-color: var(--secondary);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* News Content Styles */
+        .news-content {
+            padding: 40px 0;
+        }
+
+        .news-filters {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            background: #ecf0f1;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .featured-article {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (min-width: 768px) {
+            .featured-article {
+                flex-direction: row;
+            }
+        }
+
+        .featured-image {
+            flex: 1;
+            min-height: 300px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .featured-content {
+            flex: 1;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .featured-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .featured-content h2 {
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .featured-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .read-more {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: var(--transition);
+            font-weight: bold;
+            align-self: flex-start;
+            margin-top: 15px;
+        }
+
+        .read-more:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .news-body {
+            padding: 20px;
+        }
+
+        .news-category {
+            display: inline-block;
+            background: #f5f7fa;
+            color: var(--primary);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .news-body h3 {
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .news-meta {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .news-excerpt {
+            margin-bottom: 15px;
+        }
+
+        .news-link {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .news-link:hover {
+            text-decoration: underline;
+        }
+
+        .events-section {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin: 40px 0;
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .event-card {
+            border-left: 4px solid var(--secondary);
+            padding-left: 20px;
+            transition: var(--transition);
+        }
+
+        .event-card:hover {
+            transform: translateX(5px);
+        }
+
+        .event-date {
+            font-size: 0.9rem;
+            color: var(--secondary);
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .event-card h3 {
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .event-meta {
+            display: flex;
+            gap: 10px;
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .event-link {
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .event-link:hover {
+            text-decoration: underline;
+        }
+
+        .newsletter-section {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            padding: 60px 40px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .newsletter-section h2 {
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 30px auto 0;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+        }
+
+        .newsletter-btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: bold;
+        }
+
+        .newsletter-btn:hover {
+            background: #2980b9;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 40px;
+        }
+
+        .page-btn {
+            padding: 8px 15px;
+            background: #ecf0f1;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .page-btn.active, .page-btn:hover {
+            background: var(--secondary);
+            color: white;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: var(--dark);
+            color: var(--text-light);
+            padding: 40px 0 0;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: flex;
+            gap: 30px;
+            padding-bottom: 30px;
+        }
+
+        .footer-content h4 {
+            color: var(--secondary);
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            background-color: #1a252f;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 992px) {
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            #top-menu {
+                margin-top: 15px;
+                width: 100%;
+            }
+            
+            #top-menu .menu {
+                justify-content: flex-start;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .mininav ul {
+                justify-content: center;
+            }
+            
+            #top-menu .menu {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            #top-menu .menu li {
+                width: 100%;
+                text-align: left;
+            }
+            
+            #top-menu .menu a {
+                padding: 12px 15px;
+                margin: 2px 0;
+            }
+            
+            .page-header {
+                padding: 60px 0;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-input {
+                border-radius: 4px;
+                margin-bottom: 10px;
+            }
+            
+            .newsletter-btn {
+                border-radius: 4px;
+                padding: 12px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-main {
+                padding: 10px 0;
+            }
+            
+            #VMC-logo {
+                font-size: 1.5rem;
+            }
+            
+            .site-title {
+                font-size: 0.9rem;
+            }
+            
+            .logo {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
+            }
+            
+            .featured-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="mininav">
+            <ul>
+                <li><a href="index.html">VMC</a></li>
+                <li><a href="about.html">Contacts</a></li>
+                <li><a href="news.html" class="active">Latest News</a></li>
+                <li><a href="history.html">History of Chemistry</a></li>
+            </ul>
+        </div>
+        
+        <div class="header-container">
+            <div class="logo-container">
+                <div class="logo">VMC</div>
+                <div class="header-main">
+                    <a href="index.html" title="VMC Homepage" id="VMC-logo">
+                        <span>The Virtual Museum of Chemistry</span>
+                    </a>
+                    <h1 class="site-title"><a href="index.html" title="Virtual Museum Of Chemistry Homepage">Where Science Meets Wonder</a></h1>
+                </div>
+            </div>
+        </div>
+        
+        <nav id="top-menu">
+            <div class="block block-menu" id="block-menu-menu-top-menu">
+                <div class="content">
+                    <ul class="menu">
+                        <li><a href="index.html" title="">Home</a></li>
+                        <li><a href="about.html" title="">About</a></li>
+                        <li><a href="history.html" title="">History of Chemistry</a></li>
+                        <li><a href="careers.html" title="">Careers</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Latest News & Updates</h1>
+            <p>Stay informed about the latest developments, events, and discoveries from the Virtual Museum of Chemistry.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <section class="news-content">
+            <div class="news-filters">
+                <button class="filter-btn active">All News</button>
+                <button class="filter-btn">Exhibits</button>
+                <button class="filter-btn">Events</button>
+                <button class="filter-btn">Research</button>
+                <button class="filter-btn">Education</button>
+            </div>
+
+            <div class="featured-article">
+                <div class="featured-image" style="background-image: url('https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');"></div>
+                <div class="featured-content">
+                    <span class="featured-badge">Featured</span>
+                    <h2>New Virtual Reality Exhibit Lets You Step Inside a Molecule</h2>
+                    <div class="featured-meta">
+                        <span>📅 June 15, 2025</span>
+                        <span>👤 Dr. Elena Rodriguez</span>
+                        <span>🏷️ Exhibits, Technology</span>
+                    </div>
+                    <p>We're excited to announce our latest immersive experience: Molecular World VR. This groundbreaking exhibit allows visitors to explore molecular structures in breathtaking detail, walking through complex compounds as if they were giant architectural wonders.</p>
+                    <a href="#" class="read-more">Read Full Story</a>
+                </div>
+            </div>
+
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-image" style="background-image: url('https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="news-body">
+                        <span class="news-category">Research</span>
+                        <h3>Breakthrough in Sustainable Chemistry Announced</h3>
+                        <div class="news-meta">
+                            <span>📅 June 10, 2025</span>
+                            <span>👤 Research Team</span>
+                        </div>
+                        <p class="news-excerpt">Our research division has developed a new catalytic process that significantly reduces energy consumption in industrial chemical reactions.</p>
+                        <a href="#" class="news-link">Read More →</a>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-image" style="background-image: url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="news-body">
+                        <span class="news-category">Education</span>
+                        <h3>Summer Chemistry Camp Goes Virtual</h3>
+                        <div class="news-meta">
+                            <span>📅 June 5, 2025</span>
+                            <span>👤 Education Department</span>
+                        </div>
+                        <p class="news-excerpt">Registration is now open for our virtual summer chemistry camp, featuring hands-on experiments and interactive sessions with leading chemists.</p>
+                        <a href="#" class="news-link">Read More →</a>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-image" style="background-image: url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="news-body">
+                        <span class="news-category">Events</span>
+                        <h3>Annual Chemistry Festival Returns with New Attractions</h3>
+                        <div class="news-meta">
+                            <span>📅 May 28, 2025</span>
+                            <span>👤 Events Team</span>
+                        </div>
+                        <p class="news-excerpt">Mark your calendars for July 15-17! Our popular Chemistry Festival is back with more demonstrations, guest speakers, and family activities.</p>
+                        <a href="#" class="news-link">Read More →</a>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-image" style="background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="news-body">
+                        <span class="news-category">Exhibits</span>
+                        <h3>Periodic Table Exhibit Gets Major Update</h3>
+                        <div class="news-meta">
+                            <span>📅 May 20, 2025</span>
+                            <span>👤 Exhibit Design Team</span>
+                        </div>
+                        <p class="news-excerpt">Our interactive periodic table exhibit has been completely redesigned with new elements, enhanced visuals, and deeper educational content.</p>
+                        <a href="#" class="news-link">Read More →</a>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-image" style="background-image: url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="news-body">
+                        <span class="news-category">Partnerships</span>
+                        <h3>New Collaboration with International Science Museums</h3>
+                        <div class="news-meta">
+                            <span>📅 May 15, 2025</span>
+                            <span>👤 Partnership Office</span>
+                        </div>
+                        <p class="news-excerpt">We're excited to announce a new partnership with science museums in Europe and Asia to share resources and create joint exhibits.</p>
+                        <a href="#" class="news-link">Read More →</a>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-image" style="background-image: url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="news-body">
+                        <span class="news-category">Education</span>
+                        <h3>New Curriculum Resources for Teachers</h3>
+                        <div class="news-meta">
+                            <span>📅 May 10, 2025</span>
+                            <span>👤 Education Department</span>
+                        </div>
+                        <p class="news-excerpt">We've launched a new set of free curriculum resources aligned with national science standards for middle and high school teachers.</p>
+                        <a href="#" class="news-link">Read More →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="events-section">
+                <h2>Upcoming Events</h2>
+                <p>Join us for these exciting chemistry events and activities.</p>
+                
+                <div class="events-grid">
+                    <div class="event-card">
+                        <div class="event-date">July 15, 2025 | 2:00 PM EST</div>
+                        <h3>Virtual Chemistry Demo: Colorful Reactions</h3>
+                        <div class="event-meta">
+                            <span>📍 Online Event</span>
+                            <span>🎫 Free Registration</span>
+                        </div>
+                        <p>Watch spectacular chemical reactions and learn about the science behind the colors.</p>
+                        <a href="#" class="event-link">Register Now →</a>
+                    </div>
+                    
+                    <div class="event-card">
+                        <div class="event-date">July 22, 2025 | 7:00 PM EST</div>
+                        <h3>Chemistry in Everyday Life Webinar</h3>
+                        <div class="event-meta">
+                            <span>📍 Online Event</span>
+                            <span>🎫 Free Registration</span>
+                        </div>
+                        <p>Explore how chemistry impacts our daily lives, from cooking to cleaning products.</p>
+                        <a href="#" class="event-link">Register Now →</a>
+                    </div>
+                    
+                    <div class="event-card">
+                        <div class="event-date">August 5-7, 2025</div>
+                        <h3>Annual Chemistry Educators Conference</h3>
+                        <div class="event-meta">
+                            <span>📍 Virtual Conference</span>
+                            <span>🎫 Early Bird Pricing Available</span>
+                        </div>
+                        <p>Join educators from around the world for workshops, presentations, and networking.</p>
+                        <a href="#" class="event-link">Learn More →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="newsletter-section">
+                <h2>Stay Updated</h2>
+                <p>Subscribe to our newsletter to receive the latest news and event announcements directly in your inbox.</p>
+                
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Your email address" required>
+                    <button type="submit" class="newsletter-btn">Subscribe</button>
+                </form>
+                
+                <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.8;">We respect your privacy. Unsubscribe at any time.</p>
+            </div>
+
+            <div class="pagination">
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn">Next →</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content row">
+                <div class="four columns">
+                    <h4>Virtual Museum of Chemistry</h4>
+                    <p>Exploring the elements that shape our world.</p>
+                </div>
+                <div class="four columns">
+                    <h4>Contact Us</h4>
+                    <p>Email: info@chemistrymuseum.org<br>Phone: +923109059611</p>
+                </div>
+                <div class="four columns">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/moazam.ishaq/">Facebook</a> | 
+                        <a href="https://x.com/imoazzam2">Twitter</a> | 
+                        <a href="https://www.instagram.com/moazzamishaq/">Instagram</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Virtual Museum of Chemistry. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // News page interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // News filtering functionality
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const newsCards = document.querySelectorAll('.news-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const filter = this.textContent;
+                    
+                    // Show/hide news cards based on filter
+                    newsCards.forEach(card => {
+                        if (filter === 'All News') {
+                            card.style.display = 'block';
+                        } else {
+                            const category = card.querySelector('.news-category').textContent;
+                            if (category === filter) {
+                                card.style.display = 'block';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            });
+            
+            // Newsletter form submission
+            const newsletterForm = document.querySelector('.newsletter-form');
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = this.querySelector('.newsletter-input').value;
+                
+                // In a real implementation, this would send the data to a server
+                alert(`Thank you for subscribing with ${email}! You'll receive our latest updates soon.`);
+                this.reset();
+            });
+            
+            // Pagination functionality
+            const pageButtons = document.querySelectorAll('.page-btn');
+            pageButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    if (this.textContent === 'Next →') {
+                        // In a real implementation, this would load the next page
+                        alert('Loading next page of news articles...');
+                    } else {
+                        // Remove active class from all buttons
+                        pageButtons.forEach(btn => {
+                            if (btn.textContent !== 'Next →') {
+                                btn.classList.remove('active');
+                            }
+                        });
+                        // Add active class to clicked button
+                        this.classList.add('active');
+                        
+                        // In a real implementation, this would load the selected page
+                        alert(`Loading page ${this.textContent}...`);
+                    }
+                });
+            });
+            
+            // Animation for news cards
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            newsCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+            
+            // Animation for event cards
+            const eventCards = document.querySelectorAll('.event-card');
+            eventCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateX(-20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateX(0)';
+                }, 300 + (index * 100));
+            });
+        });
+    </script>
+</body>
+</html>

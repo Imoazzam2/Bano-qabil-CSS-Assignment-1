@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Museum of Chemistry</title>
+    <meta name="description" content="Explore the fascinating world of chemistry at our Virtual Museum. Discover exhibits, events, and more.">
+    <style>
+        /* CSS Variables for consistent theming */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --text: #333;
+            --text-light: #fff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -15px;
+        }
+
+        .twelve.columns {
+            width: 100%;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--primary);
+            color: var(--text-light);
+            box-shadow: var(--shadow);
+            padding: 0 0 10px 0;
+        }
+
+        .mininav {
+            background-color: #1a252f;
+            padding: 8px 0;
+            font-size: 0.9rem;
+        }
+
+        .mininav ul {
+            list-style: none;
+            display: flex;
+            justify-content: flex-end;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .mininav li {
+            margin-left: 20px;
+        }
+
+        .mininav a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .mininav a:hover {
+            color: var(--secondary);
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            flex: 0 0 auto;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-main {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+            flex: 1;
+        }
+
+        #VMC-logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: var(--text-light);
+            margin-bottom: 5px;
+        }
+
+        .site-title {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: normal;
+            color: #ecf0f1;
+        }
+
+        .site-title a {
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        /* Navigation Styles - Moved below header */
+        #top-menu {
+            background-color: #34495e;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        #top-menu .menu {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        #top-menu .menu li {
+            margin: 0;
+        }
+
+        #top-menu .menu a {
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
+            transition: var(--transition);
+            border-radius: 4px;
+            margin: 0 2px;
+        }
+
+        #top-menu .menu a.active {
+            background-color: var(--secondary);
+        }
+
+        #top-menu .menu a:hover {
+            background-color: var(--secondary);
+        }
+
+        /* Slider Styles */
+        .flexslider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            height: 500px;
+        }
+
+        .slides {
+            list-style: none;
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 100%;
+        }
+
+        .slides li {
+            width: 100%;
+            flex-shrink: 0;
+            position: relative;
+            height: 100%;
+        }
+
+        .views-field-field-slide-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .flex-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            color: var(--text-light);
+            padding: 30px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+
+        .flex-caption h2 {
+            margin-top: 0;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .flex-caption p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            max-width: 600px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: var(--transition);
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .flex-control-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .flex-control-paging {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .flex-control-paging li a {
+            width: 12px;
+            height: 12px;
+            display: block;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            text-indent: -9999px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .flex-control-paging li a.flex-active {
+            background: var(--secondary);
+            transform: scale(1.2);
+        }
+
+        .flex-direction-nav {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 10;
+        }
+
+        .flex-direction-nav a {
+            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .flex-direction-nav a:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            padding: 40px 0;
+        }
+
+        .welcome-section {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .welcome-section h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 10px;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .highlight-link {
+            color: var(--secondary);
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .highlight-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Highlights Section */
+        #highlights {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .four.columns {
+            width: calc(33.333% - 20px);
+            padding: 0 15px;
+        }
+
+        .highlight-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            border-radius: 50%;
+            color: white;
+        }
+
+        .highlight-card h3 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+
+        .card-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .card-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Media Section */
+        #media {
+            background-color: white;
+            padding: 40px 20px;
+            margin: 40px 0;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        #media h2 {
+            text-align: center;
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .media-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .media-item {
+            max-width: 300px;
+            text-align: center;
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .media-item img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .media-item video {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        /* Advanced Elements */
+        #advanced {
+            background-color: #f5f7fa;
+            padding: 40px 20px;
+            margin: 40px 0;
+            border-radius: 8px;
+        }
+
+        #advanced h2 {
+            text-align: center;
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .advanced-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        details {
+            background: white;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        summary {
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .progress-section, .element-popularity {
+            margin-bottom: 20px;
+        }
+
+        progress, meter {
+            width: 100%;
+            height: 20px;
+            margin: 5px 0;
+        }
+
+        .interactive-frame {
+            margin-top: 30px;
+        }
+
+        .interactive-frame h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        /* News Preview Section */
+        .news-preview {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin: 40px 0;
+        }
+
+        .news-preview h2 {
+            text-align: center;
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 30px;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .news-item {
+            background: #f5f7fa;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .news-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-image {
+            height: 160px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .news-content {
+            padding: 20px;
+        }
+
+        .news-date {
+            font-size: 0.8rem;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .news-content h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .news-excerpt {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .news-link {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .news-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Sidebar Styles */
+        aside {
+            background-color: white;
+            padding: 30px;
+            margin: 40px 0;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .sidebar h3 {
+            color: var(--primary);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .sidebar a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: var(--dark);
+            color: var(--text-light);
+            padding: 40px 0 0;
+        }
+
+        .footer-content {
+            display: flex;
+            gap: 30px;
+            padding-bottom: 30px;
+        }
+
+        .footer-content h4 {
+            color: var(--secondary);
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            background-color: #1a252f;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 992px) {
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            #top-menu {
+                margin-top: 15px;
+                width: 100%;
+            }
+            
+            #top-menu .menu {
+                justify-content: flex-start;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .mininav ul {
+                justify-content: center;
+            }
+            
+            #top-menu .menu {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            #top-menu .menu li {
+                width: 100%;
+                text-align: left;
+            }
+            
+            #top-menu .menu a {
+                padding: 12px 15px;
+                margin: 2px 0;
+            }
+            
+            .flexslider {
+                height: 300px;
+            }
+            
+            .flex-caption {
+                padding: 20px;
+            }
+            
+            .flex-caption h2 {
+                font-size: 1.5rem;
+            }
+            
+            .flex-caption p {
+                font-size: 1rem;
+            }
+            
+            #highlights {
+                flex-direction: column;
+            }
+            
+            .four.columns {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+            
+            .media-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .media-item {
+                min-width: 100%;
+            }
+            
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-main {
+                padding: 10px 0;
+            }
+            
+            #VMC-logo {
+                font-size: 1.5rem;
+            }
+            
+            .site-title {
+                font-size: 0.9rem;
+            }
+            
+            .flex-direction-nav {
+                display: none;
+            }
+            
+            .flex-caption h2 {
+                font-size: 1.3rem;
+            }
+            
+            .logo {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+            
+            .card-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
+            }
+            
+            .welcome-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="mininav">
+            <ul>
+                <li><a href="#">VMC</a></li>
+                <li><a href="#">Contacts</a></li>
+                <li><a href="news.html">Latest News</a></li>
+                <li><a href="history.html">History of Chemistry</a></li>
+            </ul>
+        </div>
+        
+        <div class="header-container">
+            <div class="logo-container">
+                <div class="logo">VMC</div>
+                <div class="header-main">
+                    <a href="index.html" title="VMC Homepage" id="VMC-logo">
+                        <span>The Virtual Museum of Chemistry</span>
+                    </a>
+                    <h1 class="site-title"><a href="index.html" title="Virtual Museum Of Chemistry Homepage">Where Science Meets Wonder</a></h1>
+                </div>
+            </div>
+        </div>
+        
+        <nav id="top-menu">
+            <div class="block block-menu" id="block-menu-menu-top-menu">
+                <div class="content">
+                    <ul class="menu">
+                        <li><a href="index.html" title="" class="active">Home</a></li>
+                        <li><a href="about.html" title="">About</a></li>
+                        <li><a href="history.html" title="">History of Chemistry</a></li>
+                        <li><a href="careers.html" title="">Careers</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Starts Here -->
+    <main class="container">
+        <!-- Hero Slider -->
+        <div class="flexslider">
+            <div class="flex-nav-container">
+                <ul class="slides">
+                    <li class="slide-1">
+                        <div class="views-field-field-slide-image">
+                            <div class="field-content">
+                                <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+                                    alt="Molecular Structures and Chemical Bonds">
+                            </div>
+                        </div>
+                        <div class="flex-caption">
+                            <h2>Welcome to the Virtual Museum of Chemistry</h2>
+                            <p>Where science meets wonder. Explore our exhibits to discover the fascinating world of chemistry and its impact on our daily lives. Discover how chemistry shapes everything from medicine to technology, and inspires innovation for a better future.</p>
+                            <span><a href="about.html" class="btn">About us</a></span>
+                        </div>
+                    </li>
+                    <li class="slide-2">
+                        <div class="views-field-field-slide-image">
+                            <div class="field-content">
+                                <img src="https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+                                    alt="Colorful Chemical Reactions">
+                            </div>
+                        </div>
+                        <div class="flex-caption">
+                            <h2>Explore the Elements</h2>
+                            <p>Dive into the world of atoms and molecules at the Virtual Museum of Chemistry. Our interactive exhibits and expert insights make learning about chemistry engaging and fun for all ages.</p>
+                            <span><a href="history.html" class="btn">History of Chemistry</a></span>
+                        </div>
+                    </li>
+                    <li class="slide-3">
+                        <div class="views-field-field-slide-image">
+                            <div class="field-content">
+                                <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+                                    alt="Chemistry Laboratory Equipment">
+                            </div>
+                        </div>
+                        <div class="flex-caption">
+                            <h2>Chemistry in Action</h2>
+                            <p>Experience the wonders of chemical reactions and laboratory innovations that have transformed our world through medicine, materials, and technology.</p>
+                            <span><a href="careers.html" class="btn">Chemistry Careers</a></span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <ol class="flex-control-nav flex-control-paging">
+                <li><a href="#" data-slide="0" class="flex-active">1</a></li>
+                <li><a href="#" data-slide="1">2</a></li>
+                <li><a href="#" data-slide="2">3</a></li>
+            </ol>
+            <div class="flex-direction-nav">
+                <a class="flex-prev" href="#">Previous</a>
+                <a class="flex-next" href="#">Next</a>
+            </div>
+        </div>
+
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+            <h2>Welcome to the Chemistry Museum</h2>
+            <p>The Virtual Museum of Chemistry houses a collection of instruments, books and memorabilia that showcase the evolution of chemical science. Among other things, it offers visitors an insight into how scientific discoveries have shaped our world, and to see historical scientific instruments, rare chemical samples, and interactive exhibits that bring chemistry to life.</p>
+            <p>Check out our <a href="#" class="highlight-link">Virtual Exhibits Catalog</a> to explore our collections.</p>
+            <p><strong>Our virtual doors are open 24/7. All exhibits include detailed information with links to additional resources. We offer interactive learning experiences and virtual tours.</strong></p>
+        </section>
+
+        <!-- Highlights Section -->
+        <section id="highlights" class="container">
+            <div class="row">
+                <div class="four columns highlight-card">
+                    <div class="card-icon">🔬</div>
+                    <h3>Interactive Exhibits</h3>
+                    <p>Engage with hands-on virtual experiments and explore chemical reactions safely from your home.</p>
+                    <a href="#" class="card-link">Explore Now</a>
+                </div>
+                <div class="four columns highlight-card">
+                    <div class="card-icon">📚</div>
+                    <h3>Educational Resources</h3>
+                    <p>Access our library of chemistry lessons, videos, and activities for all age groups.</p>
+                    <a href="#" class="card-link">Learn More</a>
+                </div>
+                <div class="four columns highlight-card">
+                    <div class="card-icon">🎪</div>
+                    <h3>History of Chemistry</h3>
+                    <p>Explore the fascinating journey of chemical discoveries from ancient alchemy to modern science.</p>
+                    <a href="history.html" class="card-link">Explore History</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Media Section -->
+        <section id="media" class="container">
+            <h2>Multimedia Gallery</h2>
+            <div class="media-container">
+                <div class="media-item">
+                    <img src="https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Chemical Reactions" />
+                    <p>Spectacular chemical reactions</p>
+                </div>
+                <div class="media-item">
+                    <iframe width="100%" height="180" src="https://www.youtube.com/embed/3_FJIpKgdV4" title="The Periodic Table: Atomic Structure" frameborder="0" allowfullscreen></iframe>
+                    <p>The Periodic Table: Atomic Structure</p>
+                </div>
+                <div class="media-item">
+                    <iframe width="100%" height="180" src="https://www.youtube.com/embed/FSyAehMdpyI" title="Chemical Reactions in Everyday Life" frameborder="0" allowfullscreen></iframe>
+                    <p>Chemical Reactions in Everyday Life</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- News Preview Section -->
+        <section class="news-preview">
+            <h2>Latest News</h2>
+            <div class="news-grid">
+                <div class="news-item">
+                    <div class="news-image" style="background-image: url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="news-content">
+                        <div class="news-date">June 15, 2025</div>
+                        <h3>New Virtual Reality Exhibit Launch</h3>
+                        <p class="news-excerpt">Step inside molecules with our groundbreaking VR experience that brings chemistry to life like never before.</p>
+                        <a href="news.html" class="news-link">Read More →</a>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <div class="news-image" style="background-image: url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="news-content">
+                        <div class="news-date">June 10, 2025</div>
+                        <h3>Summer Chemistry Camp Registration Open</h3>
+                        <p class="news-excerpt">Join our virtual summer camp for hands-on experiments and interactive sessions with expert chemists.</p>
+                        <a href="news.html" class="news-link">Read More →</a>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <div class="news-image" style="background-image: url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="news-content">
+                        <div class="news-date">June 5, 2025</div>
+                        <h3>Partnership with International Science Museums</h3>
+                        <p class="news-excerpt">We're excited to announce new collaborations with science museums across Europe and Asia.</p>
+                        <a href="news.html" class="news-link">Read More →</a>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="news.html" class="btn">View All News</a>
+            </div>
+        </section>
+
+        <!-- Advanced Elements Section -->
+        <section id="advanced" class="container">
+            <h2>Interactive Features</h2>
+            <div class="advanced-container">
+                <details>
+                    <summary>Chemistry Fun Facts</summary>
+                    <p>Did you know that the only letter not appearing on the periodic table is J? Or that the average person has about 0.2 milligrams of gold in their body?</p>
+                </details>
+
+                <div class="progress-section">
+                    <label for="chemistry-knowledge">Your Chemistry Knowledge:</label>
+                    <progress id="chemistry-knowledge" value="70" max="100">70%</progress>
+                    <span>70%</span>
+                </div>
+
+                <div class="element-popularity">
+                    <label for="oxygen-popularity">Oxygen Popularity:</label>
+                    <meter id="oxygen-popularity" value="0.8" min="0" max="1" low="0.2" high="0.8" optimum="0.9">80%</meter>
+                    <span>Very Popular</span>
+                </div>
+
+                <div class="interactive-frame">
+                    <h3>Periodic Table Preview</h3>
+                    <iframe src="https://ptable.com/?lang=en" width="100%" height="300" title="Interactive Periodic Table"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sidebar (move this inside main, after advanced section) -->
+        <aside class="container">
+            <div class="sidebar">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Current Exhibits</a></li>
+                    <li><a href="history.html">History of Chemistry</a></li>
+                    <li><a href="#">Chemistry Blog</a></li>
+                    <li><a href="#">Photo Gallery</a></li>
+                    <li><a href="#">Plan Your Visit</a></li>
+                </ul>
+                
+                <h3>Chemistry Fact of the Day</h3>
+                <p>Water is the only substance that naturally exists in all three physical states (solid, liquid, gas) at temperatures found on Earth.</p>
+                
+                <h3>Upcoming Events</h3>
+                <ul>
+                    <li><a href="#">July 15: Virtual Chemistry Demo</a></li>
+                    <li><a href="#">July 22: Chemistry in Everyday Life Webinar</a></li>
+                    <li><a href="#">August 5-7: Chemistry Educators Conference</a></li>
+                </ul>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Footer Styles -->
+    <footer>
+        <div class="container">
+            <div class="footer-content row">
+                <div class="four columns">
+                    <h4>Virtual Museum of Chemistry</h4>
+                    <p>Exploring the elements that shape our world.</p>
+                </div>
+                <div class="four columns">
+                    <h4>Contact Us</h4>
+                    <p>Email: info@chemistrymuseum.org<br>Phone: +923106059611</p>
+                </div>
+                <div class="four columns">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/moazam.ishaq/">Facebook</a> | 
+                        <a href="https://x.com/imoazzam2">Twitter</a> | 
+                        <a href="https://www.instagram.com/moazzamishaq/">Instagram</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Virtual Museum of Chemistry. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Slider functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const slides = document.querySelectorAll('.slides li');
+            const controls = document.querySelectorAll('.flex-control-paging li a');
+            const prevButton = document.querySelector('.flex-prev');
+            const nextButton = document.querySelector('.flex-next');
+            let currentSlide = 0;
+            let slideInterval;
+
+            // Function to show a specific slide
+            function showSlide(index) {
+                // Update slider position for smooth transition
+                const slider = document.querySelector('.slides');
+                slider.style.transform = `translateX(-${index * 100}%)`;
+                
+                // Remove active class from all controls
+                controls.forEach(control => {
+                    control.classList.remove('flex-active');
+                });
+                
+                // Add active class to current control
+                controls[index].classList.add('flex-active');
+                currentSlide = index;
+            }
+
+            // Function to show next slide
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }
+
+            // Function to show previous slide
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                showSlide(currentSlide);
+            }
+
+            // Add event listeners to control dots
+            controls.forEach(control => {
+                control.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const slideIndex = parseInt(this.getAttribute('data-slide'));
+                    showSlide(slideIndex);
+                    resetInterval(); // Reset the auto-slide interval
+                });
+            });
+
+            // Add event listeners to navigation arrows
+            if (prevButton) {
+                prevButton.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    prevSlide();
+                    resetInterval();
+                });
+            }
+
+            if (nextButton) {
+                nextButton.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    nextSlide();
+                    resetInterval();
+                });
+            }
+
+            // Function to reset the auto-slide interval
+            function resetInterval() {
+                clearInterval(slideInterval);
+                slideInterval = setInterval(nextSlide, 5000);
+            }
+
+            // Initialize the slider
+            showSlide(0);
+            
+            // Start auto-sliding
+            slideInterval = setInterval(nextSlide, 5000);
+            
+            // Pause auto-sliding when user hovers over slider
+            const sliderContainer = document.querySelector('.flexslider');
+            if (sliderContainer) {
+                sliderContainer.addEventListener('mouseenter', function() {
+                    clearInterval(slideInterval);
+                });
+                
+                sliderContainer.addEventListener('mouseleave', function() {
+                    slideInterval = setInterval(nextSlide, 5000);
+                });
+            }
+
+            // Add keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                    resetInterval();
+                } else if (e.key === 'ArrowRight') {
+                    nextSlide();
+                    resetInterval();
+                }
+            });
+
+            // Enhance details elements with smooth animation
+            const detailsElements = document.querySelectorAll('details');
+            detailsElements.forEach(detail => {
+                detail.addEventListener('toggle', function() {
+                    if (this.open) {
+                        this.style.maxHeight = this.scrollHeight + 'px';
+                    } else {
+                        this.style.maxHeight = null;
+                    }
+                });
+            });
+
+            // Add animation to progress bars on scroll
+            function animateProgressBars() {
+                const progressBars = document.querySelectorAll('progress, meter');
+                progressBars.forEach(bar => {
+                    const rect = bar.getBoundingClientRect();
+                    if (rect.top < window.innerHeight - 50) {
+                        bar.style.opacity = '1';
+                        bar.style.transform = 'scaleX(1)';
+                    }
+                });
+            }
+
+            // Initial check for progress bars
+            animateProgressBars();
+            
+            // Check on scroll
+            window.addEventListener('scroll', animateProgressBars);
+
+            // Add smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Add loading animation for images
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.addEventListener('load', function() {
+                    this.style.opacity = '1';
+                });
+                
+                // Set initial opacity for fade-in effect
+                if (img.complete) {
+                    img.style.opacity = '1';
+                } else {
+                    img.style.opacity = '0';
+                    img.style.transition = 'opacity 0.3s ease';
+                }
+            });
+
+            console.log('Virtual Museum of Chemistry website loaded successfully!');
+        });
+    </script>
+</body>
+</html>
